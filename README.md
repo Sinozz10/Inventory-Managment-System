@@ -1,2 +1,2 @@
 # Inventory-Managment-System
-Part of Lab-4 Programmin-II Course
+Part of Lab-4 Programming-II Course

@@ -9,11 +9,17 @@ package customerproduct;
  * @author Asus
  */
 public class CustomerProduct {
-   
     private String customerSSN;
     private String productID; 
     private LocalDate purchaseDate;
     private boolean paid; 
+
+    public CustomerProduct(String customerSSN, String productID, LocalDate purchaseDate, boolean paid) {
+        this.customerSSN = customerSSN;
+        this.productID = productID;
+        this.purchaseDate = purchaseDate;
+        this.paid = paid;
+    }
     
     
     

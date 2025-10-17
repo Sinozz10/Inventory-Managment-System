@@ -9,10 +9,31 @@ package customerproduct;
  * @author Asus
  */
 public class CustomerProduct {
-
-    /**
-     * @param args the command line arguments
-     */
+   
+    private String customerSSN;
+    private String productID; 
+    private LocalDate purchaseDate;
+    private boolean paid; 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) {
         System.out.println("wishy");
     }

@@ -4,6 +4,8 @@
  */
 package customerproduct;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Asus
@@ -32,6 +34,10 @@ public class CustomerProduct {
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
+    
+    public String lineRepresentation(){
+    return customerSSN + "," + productID + "," + purchaseDate + "," + paid ; 
+    }
 
     public boolean isPaid() {
         return paid;
@@ -41,7 +47,9 @@ public class CustomerProduct {
         this.paid = paid;
     }
     
-    
+    public String getSearchKey(){
+     return customerSSN + "," + productID + "," + purchaseDate;
+    } 
     
     
     

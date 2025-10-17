@@ -14,12 +14,12 @@ public class Product {
 
     //Constructor
     public Product(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
-        this.productID = productID;
-        this.productName = productName;
-        this.manufacturerName = manufacturerName;
-        this.supplierName = supplierName;
-        this.quantity = quantity;
-        this.price = price;
+        this.productID=productID;
+        this.productName=productName;
+        this.manufacturerName=manufacturerName;
+        this.supplierName=supplierName;
+        this.quantity=quantity;
+        this.price=price;
     }
 
     //Methods
@@ -28,7 +28,11 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        if (quantity >= 0){
+            this.quantity=quantity;
+        }else{
+            this.quantity=0;
+        }
     }
 
     public String getSearchKey(){

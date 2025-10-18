@@ -1,13 +1,14 @@
 import java.util.*;
+import java.io.*;
 
 public class Product {
     //Init
     //Start
     //1 Constructor DONE
-    //4 Methods
+    //4 Methods DONE
 
     //Attributes
-    //I Made them Final as they won't change anymore after get.
+    //I Made them Final as they won't change anymore after getting.
     private final String productID, productName, manufacturerName, supplierName;
     private int quantity ; //Except Quantity.
     private final float price;

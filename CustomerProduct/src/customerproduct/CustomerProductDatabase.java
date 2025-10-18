@@ -4,6 +4,7 @@
  */
 package customerproduct;
 
+import static java.lang.constant.ConstantDescs.NULL;
 import java.util.ArrayList;
 
 /**
@@ -33,8 +34,56 @@ public class CustomerProductDatabase {
          return false;         
        }    
             
-            
-            
+    /**
+     *
+     * @param record
+     */
+    public void insertRecord(CustomerProduct record){
+          if(!contains(record.getSearchKey())) {
+            records.add(record); }   
+          else {
+              System.out.println("already exists"); 
+          }
+       }     
+       
+           
+       public void deleteRecord(String key){
+            if(!contains(key)){
+          System.out.println("this customer product object doesnt exist");     
+          }
+            else{
+           for(int i=0;i<records.size();i++){
+             if(records.get(i).getSearchKey().equals(key)) {
+                records.remove(i);
+                  break;}}
+             } }   
+                  
+       
+       public CustomerProduct getRecord(String key){
+          if(!contains(key)){
+          System.out.println("this customer product object doesnt exist"); 
+          }
+             else  {
+               for(int i=0;i<records.size();i++){
+             if(records.get(i).getSearchKey().equals(key)) {
+              return records.get(i);}}}    
+          return null;
+          }
+          
+          
+          
+    
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
        }
             
-            }
+            

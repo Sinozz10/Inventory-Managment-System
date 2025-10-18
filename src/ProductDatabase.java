@@ -7,7 +7,7 @@ public class ProductDatabase {
     //Methods: 8 DONE
 
     //Attributes
-    private ArrayList<Product> records;
+    private final ArrayList<Product> records;
     private final String filename;
 
     //Constructor
@@ -107,14 +107,11 @@ public class ProductDatabase {
 
     }
 
-    //Getters and setters
+    //Getters
+    //No Setters as both are final .. No Change.
 
     public ArrayList<Product> getRecords() {
         return records;
-    }
-
-    public void setRecords(ArrayList<Product> records) {
-        this.records = records;
     }
 
     public String getFilename() {

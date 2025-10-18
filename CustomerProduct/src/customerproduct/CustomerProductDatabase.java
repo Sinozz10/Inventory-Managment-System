@@ -4,8 +4,12 @@
  */
 package customerproduct;
 
-import static java.lang.constant.ConstantDescs.NULL;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -18,7 +22,7 @@ public class CustomerProductDatabase {
     public CustomerProductDatabase(String filename) {
         this.filename = filename;
     }
-     
+    
             
      public ArrayList<CustomerProduct> returnAllRecords(){
          return records;
@@ -70,10 +74,34 @@ public class CustomerProductDatabase {
           return null;
           }
           
-          
+      public CustomerProduct createRecordFrom(String line){    
+        String[] product=line.split(",");
+          boolean p=Boolean.parseBoolean(product[3]);
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+          LocalDate date=LocalDate.parse(product[2], formatter);    
+        CustomerProduct cust =new CustomerProduct(product[0],product[1],date);      
+        cust.setPaid(p);
+       return cust;         
+                }
           
     
+      public void readFromFile() throws FileNotFoundException{
+     File f=new File(filename);
+     Scanner scan=new Scanner(f);
+      while(scan.hasNextLine()){
+       CustomerProduct cust= createRecordFrom(scan.nextLine());
+        insertRecord(cust);
+      }
+   }  
+      
+      
+      
+        public void saveToFile(){
+        
+        
+        
        
+        }   
        
        
        

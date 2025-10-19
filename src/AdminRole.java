@@ -11,8 +11,7 @@ public class AdminRole {
     private EmployeeUserDatabase database;
     
     public AdminRole() {
-        database = new EmployeeUserDatabase("Employees.txt");
-        database.readFromFile();
+        database = new EmployeeUserDatabase(FilesChecker.getEmployeePath());
     }
     public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) {
         EmployeeUser employeeToAdd = new EmployeeUser(employeeId, name, email, address, phoneNumber);
@@ -28,10 +27,9 @@ public class AdminRole {
         }
         }
     public EmployeeUser[] getListOfEmployees() {
-        
         return database.returnAllRecords().toArray(new EmployeeUser[database.returnAllRecords().size()]);
-
     }
+
     public void logout() {
         database.saveToFile();
         System.out.println("Logged Out");

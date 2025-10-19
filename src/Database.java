@@ -17,10 +17,10 @@ public abstract class Database<T extends Record> {
 
     // file reading and writing
     public void readFromFile(){
+        records.clear();
         try (Scanner reader = new Scanner(new File(filename))) {
             while (reader.hasNextLine()) {
-                T temp = createRecordFrom(reader.nextLine());
-                insertRecord(temp);
+                insertNewRecord((reader.nextLine()));
             }
         } catch (FileNotFoundException e) {
             System.err.println("Error file not found: "+e.getMessage());

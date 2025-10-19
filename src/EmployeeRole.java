@@ -8,13 +8,9 @@ public class EmployeeRole {
     private CustomerProductDatabase customerProductDatabase;
 
     public EmployeeRole() {
-        productsDatabase = new ProductDatabase("Products.txt");
-        productsDatabase.readFromFile();
-
-        customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
-        customerProductDatabase.readFromFile();
+        productsDatabase = new ProductDatabase(FilesChecker.getProductPath());
+        customerProductDatabase = new CustomerProductDatabase(FilesChecker.getCustomerProductPath());
     }
-
 
     public void SetProductDatabase(ProductDatabase A_productDatabase) {
         this.productsDatabase = A_productDatabase;
@@ -32,19 +28,18 @@ public class EmployeeRole {
         return customerProductDatabase;
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity) {
-        float price1=0;
-        Product productAdded = new Product(productID,productName,manufacturerName,supplierName,quantity,price1);
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
+        Product productAdded = new Product(productID,productName,manufacturerName,supplierName,quantity,price);
         productsDatabase.insertRecord(productAdded);
         productsDatabase.saveToFile();
     }
 
-    public ArrayList<Product> getListOfProducts() {
-        return productsDatabase.returnAllRecords();
+    public CustomerProduct[] getListOfPurchasingOperations() {
+        return customerProductDatabase.returnAllRecords().toArray(new CustomerProduct[0]);
     }
 
-    public ArrayList<CustomerProduct> getListOfPurchasingOperations() {
-        return customerProductDatabase.returnAllRecords();
+    public Product[] getListOfProducts() {
+        return productsDatabase.returnAllRecords().toArray(new Product[productsDatabase.returnAllRecords().size()]);
     }
 
     public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
@@ -95,10 +90,10 @@ public class EmployeeRole {
 
     public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
         String formattedDate = String.format("%02d-%02d-%04d", purchaseDate.getDayOfMonth(), purchaseDate.getMonthValue(), purchaseDate.getYear());
-
         CustomerProduct transaction = customerProductDatabase.getRecord(customerSSN + ",," + formattedDate);
 
-        if (transaction == null || transaction.isPaid()) {
+        if (transaction == null || transaction.isPaid())
+        {
             return false;
         } else {
             transaction.setPaid(true);
@@ -106,5 +101,4 @@ public class EmployeeRole {
             return true;
         }
     }
-
 }

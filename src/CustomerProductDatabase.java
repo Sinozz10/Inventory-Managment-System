@@ -70,17 +70,20 @@ public class CustomerProductDatabase {
         return cust;
     }
 
-    public void readFromFile() throws FileNotFoundException {
-        File f = new File(filename);
-        Scanner scan = new Scanner(f);
-        while (scan.hasNextLine()) {
-            CustomerProduct cust = createRecordFrom(scan.nextLine());
-            insertRecord(cust);
+    public void readFromFile(){
+        try (Scanner scan = new Scanner(new File(filename))) {
+            while (scan.hasNextLine()) {
+                CustomerProduct cust = createRecordFrom(scan.nextLine());
+                insertRecord(cust);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public void saveToFile() {
-    }
+    //Handled as a Super class
+    public void saveToFile() {}
 }
             
             

@@ -43,8 +43,8 @@ public class EmployeeRole {
         return productsDatabase.returnAllRecords();
     }
 
-    public CustomerProduct[] getListOfPurchasingOperations() {
-        return customerProductDatabase.readFromFile();
+    public ArrayList<CustomerProduct> getListOfPurchasingOperations() {
+        return customerProductDatabase.returnAllRecords();
     }
 
     public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {

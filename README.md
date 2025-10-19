@@ -8,7 +8,7 @@ A Java-based inventory management system for retail stores with Admin and Employ
 - Add new employees to the system
 - Remove employees from the system
 - View all registered employees
-- Auto-generated employee IDs (E####)
+- Auto-generated employee IDs
 
 ### 👨‍💼 Employee Operations
 - Add products to inventory
@@ -16,7 +16,7 @@ A Java-based inventory management system for retail stores with Admin and Employ
 - Handle product returns (14-day policy)
 - Apply payments to purchases
 - View all products and purchase history
-- Auto-generated product IDs (P####)
+- Auto-generated product IDs
 
 ## 📁 Project Structure
 
@@ -42,10 +42,10 @@ A Java-based inventory management system for retail stores with Admin and Employ
 
 ## 🎯 OOP Concepts Applied (Part 2 - Refactored)
 
-- **Inheritance**: `Database<T>` abstract class extended by all database classes
-- **Polymorphism**: Generic type `<T extends Record>` for flexible database operations
-- **Abstraction**: `Record` interface implemented by all data models
-- **Encapsulation**: Private fields with public getters/setters
+- **Inheritance**: `Database<T>` abstract class extended by all database classes.
+- **Polymorphism**: Generic type `<T extends Record>` for flexible database operations.
+- **Abstraction**: `Record` interface implemented by all data models.
+- **Encapsulation**: Private fields with public getters/setters.
 
 ## 💾 Data Storage Format
 
@@ -66,12 +66,7 @@ P9828,Laptop,China,Makers,195,780.0
 
 ## 🚀 How to Run
 
-1. **Compile all Java files:**
-   ```bash
-   javac *.java
-   ```
-
-2. **Run the main program:**
+1. **Run the main program:**
    ```bash
    java Main
    ```
@@ -79,14 +74,14 @@ P9828,Laptop,China,Makers,195,780.0
 3. **Navigate through menus:**
    - Choose Admin (1) or Employee (2) operations
    - Follow on-screen prompts
-   - Data is automatically saved to files
+   - Data is automatically saved to files (ALWAYS)
 
 ## 🔑 Key Features
 
 ### 🎲 Automatic ID Generation
 - Employee IDs: E1000 - E9999
 - Product IDs: P1000 - P9999
-- Customer SSN: 10-digit random number
+- Customer SSN: 10-digit **random** number
 
 ### ↩️ Return Policy
 - Customers can return products within 14 days
@@ -113,14 +108,9 @@ P9828,Laptop,China,Makers,195,780.0
 
 ## 📋 Requirements
 
-- Java 11 or higher (for LocalDate support)
 - No external libraries required
 
 ------------------------------
-Course: CC272 - Programming II
-Institution: Alexandria University - Faculty of Engineering
-Semester: Fall 2025/2026
-
 **Course**: CC272 - Programming II  
 **Institution**: Alexandria University - Faculty of Engineering  
 **Semester**: Fall 2025/2026

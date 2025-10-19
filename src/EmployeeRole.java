@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
-/**
- *
- * @author HY
- */
 public class EmployeeRole {
 
-    private ProductDatabase  = productsDatabase;
-    private CustomerProductDatabase  = customerProductDatabase;
+    private ProductDatabase productsDatabase;
+    private CustomerProductDatabase customerProductDatabase;
 
     public EmployeeRole() {
         productsDatabase = new ProductDatabase("Products.txt");
@@ -41,34 +33,29 @@ public class EmployeeRole {
     }
 
     public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity) {
-        Product productedAdded = new Product(String productID
-        , String productName, String manufacturerName
-        , String supplierName, int quantity
-        );
-        productsDatabase.addProduct(productedAdded);
-        productsDatabase.saveToFile("Products.txt");
+        float price1=0;
+        Product productAdded = new Product(productID,productName,manufacturerName,supplierName,quantity,price1);
+        productsDatabase.insertRecord(productAdded);
+        productsDatabase.saveToFile();
     }
 
-    public Product[] getListOfProducts() {
-        return productsDatabase.loadFromFile("Products.txt");
+    public ArrayList<Product> getListOfProducts() {
+        return productsDatabase.returnAllRecords();
     }
 
     public CustomerProduct[] getListOfPurchasingOperations() {
-        return customerProductDatabase.loadFromFile("CustomersProducts.txt");
+        return customerProductDatabase.readFromFile();
     }
 
-    public boolean purchaseProduct(String customerSSN, StringproductID, LocalDate purchaseDate) {
-        Product productToCheck = productsDatabase.findProductById(productID);
+    public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
+        Product productToCheck = productsDatabase.getRecord(productID);
         if (productToCheck != null && productToCheck.getQuantity() != 0) {
 
             productToCheck.setQuantity(productToCheck.getQuantity() - 1);
-            productsDatabase.saveToFile("Products.txt");
-
-            CustomerProduct createPurchase = new CustomerProductString customerSSN
-            , String productID, LocalDate, purchaseDate
-            );
-        customerProductDatabase.addPurchase(createPurchase);
-            customerProductDatabase.saveToFile("CustomersProducts.txt");
+            productsDatabase.saveToFile();
+            CustomerProduct createPurchase = new CustomerProduct(customerSSN,productID, purchaseDate);
+            customerProductDatabase.insertRecord(createPurchase);
+            customerProductDatabase.saveToFile();
             return true;
         } else {
             return false;
@@ -101,8 +88,8 @@ public class EmployeeRole {
     }
 
     public void logout() {
-        productsDatabase.saveToFile("Products.txt");
-        customerProductDatabase.saveToFile("CustomersProducts.txt");
+        productsDatabase.saveToFile();
+        customerProductDatabase.saveToFile();
         System.out.println("All unsaved data,Are saved now.");
     }
 

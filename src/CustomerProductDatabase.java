@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 public class CustomerProductDatabase extends Database<CustomerProduct> {
     public CustomerProductDatabase(String filename) {
@@ -8,12 +9,23 @@ public class CustomerProductDatabase extends Database<CustomerProduct> {
 
     public CustomerProduct createRecordFrom(String line) {
         String[] product = line.split(",");
-        boolean p = Boolean.parseBoolean(product[3]);
+
+        // ID validation to only accept alphanumeric characters
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9]+$");
+        if(!pattern.matcher(product[1]).find()){throw new IllegalArgumentException("Invalid CustomerProduct object format");}
+
+        if (product[0].length() != 10){throw new IllegalArgumentException("Invalid CustomerProduct object format");}
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(product[2], formatter);
         CustomerProduct cust = new CustomerProduct(product[0], product[1], date);
-        cust.setPaid(p);
-        return cust;
+
+        try{
+            Long.parseLong(product[0]);
+            return cust;
+        }catch(NumberFormatException e){
+            throw new IllegalArgumentException("Invalid CustomerProduct object format");
+        }
     }
 }
             

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -6,6 +7,7 @@ public class EmployeeRole {
 
     private ProductDatabase productsDatabase;
     private CustomerProductDatabase customerProductDatabase;
+    private boolean paymentFlag = false;
 
     public EmployeeRole() {
         productsDatabase = new ProductDatabase(FilesChecker.getProductPath());
@@ -29,8 +31,7 @@ public class EmployeeRole {
     }
 
     public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
-        Product productAdded = new Product(productID,productName,manufacturerName,supplierName,quantity,price);
-        productsDatabase.insertRecord(productAdded);
+        productsDatabase.insertNewRecord(productID + "," + productName + "," + manufacturerName + "," + supplierName + "," + quantity + "," + price);
         productsDatabase.saveToFile();
     }
 
@@ -48,8 +49,9 @@ public class EmployeeRole {
 
             productToCheck.setQuantity(productToCheck.getQuantity() - 1);
             productsDatabase.saveToFile();
-            CustomerProduct createPurchase = new CustomerProduct(customerSSN,productID, purchaseDate);
-            customerProductDatabase.insertRecord(createPurchase);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            customerProductDatabase.insertNewRecord(customerSSN + "," + productID + "," + purchaseDate.format(formatter));
             customerProductDatabase.saveToFile();
             return true;
         } else {
@@ -89,16 +91,18 @@ public class EmployeeRole {
     }
 
     public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
-        String formattedDate = String.format("%02d-%02d-%04d", purchaseDate.getDayOfMonth(), purchaseDate.getMonthValue(), purchaseDate.getYear());
-        CustomerProduct transaction = customerProductDatabase.getRecord(customerSSN + ",," + formattedDate);
+        paymentFlag = false; //3ashan kol mara y5osh yzabat el flag.
+        for (int i = 0; i < customerProductDatabase.returnAllRecords().size(); i++) {
+            CustomerProduct record = customerProductDatabase.returnAllRecords().get(i);
 
-        if (transaction == null || transaction.isPaid())
-        {
-            return false;
-        } else {
-            transaction.setPaid(true);
-            customerProductDatabase.saveToFile();
-            return true;
+            if (record.getCustomerSSN().equals(customerSSN) && record.getPurchaseDate().equals(purchaseDate)) {
+                if (!record.isPaid()) {
+                    record.setPaid(true);
+                    customerProductDatabase.saveToFile();
+                    paymentFlag = true;
+                }
+            }
         }
+        return paymentFlag;
     }
 }

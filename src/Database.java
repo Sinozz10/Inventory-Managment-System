@@ -31,8 +31,8 @@ public abstract class Database<T extends Record> {
 
     public void saveToFile(){
         StringBuilder text = new StringBuilder();
-        for (T emp: records){
-            text.append(emp.lineRepresentation());
+        for (T temp: records){
+            text.append(temp.lineRepresentation());
             text.append("\n");
         }
         try(FileWriter writer = new FileWriter(filename)){
@@ -69,9 +69,9 @@ public abstract class Database<T extends Record> {
     }
 
     public T getRecord(String key){
-        for(T emp : records){
-            if (key.equals(emp.getSearchKey())){
-                return emp;
+        for(T temp : records){
+            if (key.equals(temp.getSearchKey())){
+                return temp;
             }
         }
         return null;

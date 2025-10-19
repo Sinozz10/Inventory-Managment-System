@@ -1,10 +1,9 @@
-public class EmployeeUser {
+public class EmployeeUser implements Record {
     // all variables are final
     private final String employeeId, name, email, address, phoneNumber;
 
     // init function
-    public EmployeeUser(String employeeId, String name, String email,
-                        String address, String phoneNumber){
+    public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber){
         this.employeeId = employeeId;
         this.name = name;
         this.email = email;

@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Product {
+public class Product implements Record {
     //Init
     //Start
     //1 Constructor DONE

@@ -1,89 +1,32 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.regex.Pattern;
 
-public class CustomerProductDatabase {
-    private final ArrayList<CustomerProduct> records = new ArrayList<>();
-    private final String filename;
-
+public class CustomerProductDatabase extends Database<CustomerProduct> {
     public CustomerProductDatabase(String filename) {
-        this.filename = filename;
-    }
-
-    public ArrayList<CustomerProduct> returnAllRecords() {
-        return records;
-    }
-
-    public boolean contains(String key) {
-        for (int i = 0; i < records.size(); i++) {
-            if (records.get(i).getSearchKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void insertRecord(CustomerProduct record) {
-        if (!contains(record.getSearchKey())) {
-            records.add(record);
-        } else {
-            System.out.println("already exists");
-        }
-    }
-
-    public void deleteRecord(String key) {
-        if (contains(key)) {
-            for (int i = 0; i < records.size(); i++) {
-                if (records.get(i).getSearchKey().equals(key)) {
-                    records.remove(i);
-                    break;
-                }
-            }
-        } else {
-            System.out.println("this customer product object doesn't exist");
-        }
-    }
-
-    public CustomerProduct getRecord(String key) {
-        if (contains(key)) {
-            for (int i = 0; i < records.size(); i++) {
-                if (records.get(i).getSearchKey().equals(key)) {
-                    return records.get(i);
-                }
-            }
-        } else {
-            System.out.println("this customer product object doesn't exist");
-        }
-        return null;
+        super(filename);
     }
 
     public CustomerProduct createRecordFrom(String line) {
         String[] product = line.split(",");
-        boolean p = Boolean.parseBoolean(product[3]);
+
+        // ID validation to only accept alphanumeric characters
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9]+$");
+        if(!pattern.matcher(product[1]).find()){throw new IllegalArgumentException("Invalid CustomerProduct object format");}
+
+        if (product[0].length() != 10){throw new IllegalArgumentException("Invalid CustomerProduct object format");}
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(product[2], formatter);
         CustomerProduct cust = new CustomerProduct(product[0], product[1], date);
-        cust.setPaid(p);
-        return cust;
-    }
 
-    public void readFromFile(){
-        try (Scanner scan = new Scanner(new File(filename))) {
-            while (scan.hasNextLine()) {
-                CustomerProduct cust = createRecordFrom(scan.nextLine());
-                insertRecord(cust);
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + e.getMessage());
-            e.printStackTrace();
+        try{
+            Long.parseLong(product[0]);
+            return cust;
+        }catch(NumberFormatException e){
+            throw new IllegalArgumentException("Invalid CustomerProduct object format");
         }
     }
-
-    //Handled as a Super class
-    public void saveToFile() {}
 }
             
             

@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class CustomerProduct {
+public class CustomerProduct implements Record{
     private final String customerSSN, productID;
     private final LocalDate purchaseDate;
     private boolean paid;

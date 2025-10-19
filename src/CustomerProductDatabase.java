@@ -1,63 +1,9 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class CustomerProductDatabase {
-    private final ArrayList<CustomerProduct> records = new ArrayList<>();
-    private final String filename;
-
+public class CustomerProductDatabase extends Database<CustomerProduct> {
     public CustomerProductDatabase(String filename) {
-        this.filename = filename;
-    }
-
-    public ArrayList<CustomerProduct> returnAllRecords() {
-        return records;
-    }
-
-    public boolean contains(String key) {
-        for (int i = 0; i < records.size(); i++) {
-            if (records.get(i).getSearchKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void insertRecord(CustomerProduct record) {
-        if (!contains(record.getSearchKey())) {
-            records.add(record);
-        } else {
-            System.out.println("already exists");
-        }
-    }
-
-    public void deleteRecord(String key) {
-        if (contains(key)) {
-            for (int i = 0; i < records.size(); i++) {
-                if (records.get(i).getSearchKey().equals(key)) {
-                    records.remove(i);
-                    break;
-                }
-            }
-        } else {
-            System.out.println("this customer product object doesn't exist");
-        }
-    }
-
-    public CustomerProduct getRecord(String key) {
-        if (contains(key)) {
-            for (int i = 0; i < records.size(); i++) {
-                if (records.get(i).getSearchKey().equals(key)) {
-                    return records.get(i);
-                }
-            }
-        } else {
-            System.out.println("this customer product object doesn't exist");
-        }
-        return null;
+        super(filename);
     }
 
     public CustomerProduct createRecordFrom(String line) {
@@ -69,21 +15,6 @@ public class CustomerProductDatabase {
         cust.setPaid(p);
         return cust;
     }
-
-    public void readFromFile(){
-        try (Scanner scan = new Scanner(new File(filename))) {
-            while (scan.hasNextLine()) {
-                CustomerProduct cust = createRecordFrom(scan.nextLine());
-                insertRecord(cust);
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    //Handled as a Super class
-    public void saveToFile() {}
 }
             
             

@@ -1,4 +1,4 @@
-public class EmployeeUser {
+public class EmployeeUser implements Record {
     // all variables are final
     private final String employeeId, name, email, address, phoneNumber;
 

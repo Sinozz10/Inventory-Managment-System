@@ -23,8 +23,9 @@ public abstract class Database<T extends Record> {
                 insertRecord(temp);
             }
         } catch (FileNotFoundException e) {
-            System.err.println("Warning: file not found -> " + filename + ", starting with empty record table." +
-                    " Create file or writing will fail.");
+            System.err.println("Error file not found: "+e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 

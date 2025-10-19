@@ -1,11 +1,13 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class CustomerProduct {
+public class CustomerProduct implements Record{
     private final String customerSSN, productID;
     private final LocalDate purchaseDate;
     private boolean paid;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public CustomerProduct(String customerSSN, String productID, LocalDate purchaseDate) {
+     public CustomerProduct(String customerSSN, String productID, LocalDate purchaseDate) {
         this.customerSSN = customerSSN;
         this.productID = productID;
         this.purchaseDate = purchaseDate;
@@ -25,7 +27,7 @@ public class CustomerProduct {
     }
 
     public String lineRepresentation(){
-    return customerSSN + "," + productID + "," + purchaseDate + "," + paid ;
+    return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid ;
     }
 
     public boolean isPaid() {
@@ -37,6 +39,6 @@ public class CustomerProduct {
     }
 
     public String getSearchKey(){
-     return customerSSN + "," + productID + "," + purchaseDate;
+     return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
     }
 }

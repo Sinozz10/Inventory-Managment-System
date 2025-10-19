@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -6,15 +7,12 @@ public class EmployeeRole {
 
     private ProductDatabase productsDatabase;
     private CustomerProductDatabase customerProductDatabase;
+    private boolean paymentFlag = false;
 
     public EmployeeRole() {
-        productsDatabase = new ProductDatabase("Products.txt");
-        productsDatabase.readFromFile();
-
-        customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
-        customerProductDatabase.readFromFile();
+        productsDatabase = new ProductDatabase(FilesChecker.getProductPath());
+        customerProductDatabase = new CustomerProductDatabase(FilesChecker.getCustomerProductPath());
     }
-
 
     public void SetProductDatabase(ProductDatabase A_productDatabase) {
         this.productsDatabase = A_productDatabase;
@@ -32,19 +30,17 @@ public class EmployeeRole {
         return customerProductDatabase;
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity) {
-        float price1=0;
-        Product productAdded = new Product(productID,productName,manufacturerName,supplierName,quantity,price1);
-        productsDatabase.insertRecord(productAdded);
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
+        productsDatabase.insertNewRecord(productID + "," + productName + "," + manufacturerName + "," + supplierName + "," + quantity + "," + price);
         productsDatabase.saveToFile();
     }
 
-    public ArrayList<Product> getListOfProducts() {
-        return productsDatabase.returnAllRecords();
+    public CustomerProduct[] getListOfPurchasingOperations() {
+        return customerProductDatabase.returnAllRecords().toArray(new CustomerProduct[0]);
     }
 
-    public ArrayList<CustomerProduct> getListOfPurchasingOperations() {
-        return customerProductDatabase.returnAllRecords();
+    public Product[] getListOfProducts() {
+        return productsDatabase.returnAllRecords().toArray(new Product[productsDatabase.returnAllRecords().size()]);
     }
 
     public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
@@ -53,8 +49,9 @@ public class EmployeeRole {
 
             productToCheck.setQuantity(productToCheck.getQuantity() - 1);
             productsDatabase.saveToFile();
-            CustomerProduct createPurchase = new CustomerProduct(customerSSN,productID, purchaseDate);
-            customerProductDatabase.insertRecord(createPurchase);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            customerProductDatabase.insertNewRecord(customerSSN + "," + productID + "," + purchaseDate.format(formatter));
             customerProductDatabase.saveToFile();
             return true;
         } else {
@@ -94,17 +91,18 @@ public class EmployeeRole {
     }
 
     public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
-        String formattedDate = String.format("%02d-%02d-%04d", purchaseDate.getDayOfMonth(), purchaseDate.getMonthValue(), purchaseDate.getYear());
+        paymentFlag = false; //3ashan kol mara y5osh yzabat el flag.
+        for (int i = 0; i < customerProductDatabase.returnAllRecords().size(); i++) {
+            CustomerProduct record = customerProductDatabase.returnAllRecords().get(i);
 
-        CustomerProduct transaction = customerProductDatabase.getRecord(customerSSN + ",," + formattedDate);
-
-        if (transaction == null || transaction.isPaid()) {
-            return false;
-        } else {
-            transaction.setPaid(true);
-            customerProductDatabase.saveToFile();
-            return true;
+            if (record.getCustomerSSN().equals(customerSSN) && record.getPurchaseDate().equals(purchaseDate)) {
+                if (!record.isPaid()) {
+                    record.setPaid(true);
+                    customerProductDatabase.saveToFile();
+                    paymentFlag = true;
+                }
+            }
         }
+        return paymentFlag;
     }
-
 }

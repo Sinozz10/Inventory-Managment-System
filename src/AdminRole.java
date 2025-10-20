@@ -1,4 +1,4 @@
-public class AdminRole {
+public class AdminRole implements Role {
     private EmployeeUserDatabase database;
     
     public AdminRole() {

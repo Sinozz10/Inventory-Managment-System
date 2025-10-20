@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-public class EmployeeRole {
+public class EmployeeRole implements Role {
 
     private ProductDatabase productsDatabase;
     private CustomerProductDatabase customerProductDatabase;

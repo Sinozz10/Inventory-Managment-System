@@ -1,2 +1,4 @@
 P9828,Laptop,China,Makers,195,780.0
 P8921,Mouse,etrain,deebmall,208,140.0
+P8913,Screen,Dahua,ElHamd,299,4000.0
+P1229,Lamp,Elsweedy,Gharib,265,60.0

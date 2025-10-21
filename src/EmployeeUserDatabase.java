@@ -20,10 +20,10 @@ public class EmployeeUserDatabase extends Database<EmployeeUser>{
         if(!pattern1.matcher(parts[0].trim()).find()){throw new IllegalArgumentException("Invalid EmployeeUser object format");}
 
         // Name validation to allow words seperated by spaces
-        Pattern pattern2 = Pattern.compile("^[A-Za-z]+(?: [A-Za-z]+)*$");
+        Pattern pattern2 = Pattern.compile("^[a-zA-Z]+( [a-zA-Z]+)*$");
         if(!pattern2.matcher(parts[1].trim()).find()){throw new IllegalArgumentException("Invalid EmployeeUser object format");}
 
-        // email validation to only allow the pattern word/-/1-9@word/-/1-9.word (more than 2 characters)(yany co zay el alexu)
+        // email validation to only allow the pattern word@word.word (words after period must be more than 2 characters)(ya3ny co zay el alexu)
         Pattern pattern3 = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.\\w{2,}$");
         if(!pattern3.matcher(parts[2].trim()).find()){throw new IllegalArgumentException("Invalid EmployeeUser object format");}
 

@@ -12,7 +12,7 @@ public class CustomerProductDatabase extends Database<CustomerProduct> {
         String[] product = line.split(",");
 
         // ID validation to only accept alphanumeric characters
-        Pattern pattern = Pattern.compile("^[A-Za-z0-9]+$");
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
         if(!pattern.matcher(product[1]).find()){throw new IllegalArgumentException("Invalid CustomerProduct object format");}
 
         if (product[0].length() != 10){throw new IllegalArgumentException("Invalid CustomerProduct object format");}

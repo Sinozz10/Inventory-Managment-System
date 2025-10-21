@@ -14,11 +14,11 @@ public class ProductDatabase extends Database<Product> {
         if (content.length != 6) {throw new IllegalArgumentException("Invalid Product object format");}
 
         // ID validation to only accept alphanumeric characters
-        Pattern pattern1 = Pattern.compile("^[A-Za-z0-9]+$");
+        Pattern pattern1 = Pattern.compile("^[a-zA-Z0-9]+$");
         if(!pattern1.matcher(content[0]).find()){throw new IllegalArgumentException("Invalid Product object format");}
 
-        // Name validation to allow words seperated by spaces
-        Pattern pattern2 = Pattern.compile("^[A-Za-z-]+(?: [A-Za-z-]+)*$");
+        // Name validation to allow words separated by spaces, and allows hyphens in the middle of words
+        Pattern pattern2 = Pattern.compile("^[a-zA-Z]+(-[a-zA-Z]+)*( [a-zA-Z]+(-[a-zA-Z]+)*)*$");
         if(!pattern2.matcher(content[1]).find()){throw new IllegalArgumentException("Invalid Product object format");}
         if(!pattern2.matcher(content[2]).find()){throw new IllegalArgumentException("Invalid Product object format");}
         if(!pattern2.matcher(content[3]).find()){throw new IllegalArgumentException("Invalid Product object format");}

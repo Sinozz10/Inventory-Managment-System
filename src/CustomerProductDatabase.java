@@ -7,6 +7,7 @@ public class CustomerProductDatabase extends Database<CustomerProduct> {
         super(filename);
     }
 
+    @Override
     public CustomerProduct createRecordFrom(String line) {
         String[] product = line.split(",");
 

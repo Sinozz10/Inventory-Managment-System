@@ -5,6 +5,7 @@ public class EmployeeUserDatabase extends Database<EmployeeUser>{
         super(filename);
     }
 
+    @Override
     public EmployeeUser createRecordFrom(String line){
         String[] parts = line.split(",");
 

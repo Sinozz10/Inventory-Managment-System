@@ -5,7 +5,8 @@ public class ProductDatabase extends Database<Product> {
         super(filename);
     }
 
-    //could be overridden here, but not needed as we abstracted from SuperClass.
+    //Changed it to override, as I fear any Error
+    @Override
     public Product createRecordFrom(String line){
         String[] content =  line.split(",");
 

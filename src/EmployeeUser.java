@@ -11,11 +11,13 @@ public class EmployeeUser implements Record {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
     // returns a serialized representation of the employee object
     public String lineRepresentation(){
         return employeeId + "," + name + "," + email + "," + address + "," + phoneNumber;
     }
 
+    @Override
     public String getSearchKey(){
         return employeeId;
     }

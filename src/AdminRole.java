@@ -21,6 +21,7 @@ public class AdminRole implements Role {
         return database.returnAllRecords().toArray(new EmployeeUser[database.returnAllRecords().size()]);
     }
 
+    @Override
     public void logout() {
         database.saveToFile();
         System.out.println("Logged Out");

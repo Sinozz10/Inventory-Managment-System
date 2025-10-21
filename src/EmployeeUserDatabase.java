@@ -23,7 +23,7 @@ public class EmployeeUserDatabase extends Database<EmployeeUser>{
         Pattern pattern2 = Pattern.compile("^[A-Za-z]+(?: [A-Za-z]+)*$");
         if(!pattern2.matcher(parts[1].trim()).find()){throw new IllegalArgumentException("Invalid EmployeeUser object format");}
 
-        // email validation to only allow the pattern word/-/1-9@word/-/1-9.word (more than 2 characters)
+        // email validation to only allow the pattern word/-/1-9@word/-/1-9.word (more than 2 characters)(yany co zay el alexu)
         Pattern pattern3 = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.\\w{2,}$");
         if(!pattern3.matcher(parts[2].trim()).find()){throw new IllegalArgumentException("Invalid EmployeeUser object format");}
 

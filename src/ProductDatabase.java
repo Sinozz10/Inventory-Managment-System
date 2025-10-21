@@ -18,7 +18,7 @@ public class ProductDatabase extends Database<Product> {
         if(!pattern1.matcher(content[0]).find()){throw new IllegalArgumentException("Invalid Product object format");}
 
         // Name validation to allow words seperated by spaces
-        Pattern pattern2 = Pattern.compile("^[A-Za-z]+(?: [A-Za-z]+)*$");
+        Pattern pattern2 = Pattern.compile("^[A-Za-z-]+(?: [A-Za-z-]+)*$");
         if(!pattern2.matcher(content[1]).find()){throw new IllegalArgumentException("Invalid Product object format");}
         if(!pattern2.matcher(content[2]).find()){throw new IllegalArgumentException("Invalid Product object format");}
         if(!pattern2.matcher(content[3]).find()){throw new IllegalArgumentException("Invalid Product object format");}

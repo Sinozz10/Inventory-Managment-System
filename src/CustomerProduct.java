@@ -38,6 +38,7 @@ public class CustomerProduct implements Record{
         this.paid = paid;
     }
 
+    @Override
     public String getSearchKey(){
      return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
     }

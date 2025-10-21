@@ -36,10 +36,12 @@ public class Product implements Record {
         }
     }
 
+    @Override
     public String getSearchKey(){
         return this.productID;
     }
 
+    @Override
     public String lineRepresentation(){
         return this.productID + "," + this.productName + "," + this.manufacturerName + "," + this.supplierName + "," + this.quantity + "," + this.price;
     }

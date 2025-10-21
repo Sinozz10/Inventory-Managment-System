@@ -84,6 +84,7 @@ public class EmployeeRole implements Role {
         return productToReturn.getPrice();
     }
 
+    @Override
     public void logout() {
         productsDatabase.saveToFile();
         customerProductDatabase.saveToFile();

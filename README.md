@@ -110,8 +110,12 @@ P9828,Laptop,China,Makers,195,780.0
 
 - No external libraries required
 
-------------------------------
-**Authors**: Yassin Khaled- Adham  Gaweesh- Yasin Waleed- Ahmed ElSayed
+-----------------------------------------------------------------
+
+**Authors**: Yassin Khaled- Adham  Gaweesh- Yasin Waleed- Ahmed ElSayed 
+
 **Course**: CC272 - Programming II  
+
 **Institution**: Alexandria University - Faculty of Engineering  
+
 **Semester**: Fall 2025/2026

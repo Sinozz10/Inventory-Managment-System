@@ -4,13 +4,13 @@ A Java-based inventory management system for retail stores with Admin and Employ
 
 ## ✨ Features
 
-### 👤 Admin Operations
+### Admin Operations
 - Add new employees to the system
 - Remove employees from the system
 - View all registered employees
 - Auto-generated employee IDs
 
-### 👨‍💼 Employee Operations
+### Employee Operations
 - Add products to inventory
 - Process customer purchases
 - Handle product returns (14-day policy)
@@ -40,14 +40,14 @@ A Java-based inventory management system for retail stores with Admin and Employ
     └── CustomersProducts.txt      # Purchase records storage
 ```
 
-## 🎯 OOP Concepts Applied (Part 2 - Refactored)
+## OOP Concepts Applied (Part 2 - Refactored)
 
 - **Inheritance**: `Database<T>` abstract class extended by all database classes.
 - **Polymorphism**: Generic type `<T extends Record>` for flexible database operations.
 - **Abstraction**: `Record` interface implemented by all data models.
 - **Encapsulation**: Private fields with public getters/setters.
 
-## 💾 Data Storage Format
+## Data Storage Format
 
 ### Employees.txt
 ```
@@ -64,7 +64,7 @@ P9828,Laptop,China,Makers,195,780.0
 7830536248,P8921,20-10-2025,false
 ```
 
-## 🚀 How to Run
+## How to Run
 
 1. **Run the main program:**
    ```bash
@@ -78,27 +78,27 @@ P9828,Laptop,China,Makers,195,780.0
 
 ## 🔑 Key Features
 
-### 🎲 Automatic ID Generation
+### Automatic ID Generation
 - Employee IDs: E1000 - E9999
 - Product IDs: P1000 - P9999
 - Customer SSN: 10-digit **random** number
 
-### ↩️ Return Policy
+### Return Policy
 - Customers can return products within 14 days
 - Returns update inventory quantities automatically
 - Refund amount is returned based on product price
 
-### 💳 Payment Tracking
+### Payment Tracking
 - Purchases can be marked as paid/unpaid
 - Payment status saved in database
 
-### ✅ Input Validation
+### Input Validation
 - Employee names: Letters and spaces only
 - Email format: standard email validation
 - Phone numbers: Up to 16 characters
 - Product IDs: Alphanumeric characters only
 
-## ⚠️ Error Handling
+## Error Handling
 
 - File not found errors
 - Invalid input format validation
@@ -106,16 +106,9 @@ P9828,Laptop,China,Makers,195,780.0
 - Out of stock validation
 - Return date validation
 
-## 📋 Requirements
-
-- No external libraries required
-
------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 **Authors**: Yassin Khaled- Adham  Gaweesh- Yasin Waleed- Ahmed ElSayed 
-
 **Course**: CC272 - Programming II  
-
 **Institution**: Alexandria University - Faculty of Engineering  
-
 **Semester**: Fall 2025/2026
